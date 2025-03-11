@@ -14,7 +14,20 @@ body {
   justify-content: space-between; /* Center cards */
   gap: 20px; /* Space between cards */
 }
-
+.notification {
+  width: 100%; /* Đảm bảo ô thông báo chiếm toàn bộ chiều rộng */
+  background-color: #ffc107; /* Màu nền cho ô thông báo */
+  color: black; /* Màu chữ cho ô thông báo */
+  padding: 5px; /* Padding cho ô thông báo */
+  text-align: center; /* Căn giữa nội dung trong ô thông báo */
+  border-radius: 5px; /* Bo góc cho ô thông báo */
+  margin-bottom: 10px; /* Khoảng cách dưới ô thông báo */
+  font-size: 2.5em; /* Kích thước chữ lớn hơn */
+  font-weight: bold; /* Chữ đậm */
+  text-transform: uppercase; /* Chữ in hoa */
+  letter-spacing: 1px; /* Khoảng cách giữa các chữ cái */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Thêm bóng cho ô thông báo */
+}
 .card {
   width: calc(50% - 10px); /* Width for larger screens */
   max-height: 80%; /* Maximum height for the card */
@@ -34,7 +47,7 @@ body {
   border: 1px solid #000000; /* Viền đậm hơn khi hover */
 }
 .card-title {
-  padding: 10px;
+  padding: 5px;
   font-size: 20px;
   font-weight: bold;
   color: white;
@@ -53,6 +66,45 @@ body {
   text-align: center; /* Căn giữa chữ */
   margin: 0; /* Bỏ margin để không có khoảng cách không cần thiết */
 }
+.card-content a {
+  font-weight: bold;
+  text-align: center; /* Căn giữa chữ */
+  margin: 0; /* Bỏ margin để không có khoảng cách không cần thiết */
+  display: inline-block;
+  padding: 10px 20px; /* Thêm padding để tạo khoảng cách xung quanh chữ */
+  background-color: #007bff; /* Màu nền cho thẻ download */
+  color: white; /* Màu chữ */
+  text-decoration: none; /* Bỏ gạch chân */
+  border-radius: 5px; /* Bo góc cho thẻ */
+  border: 2px solid #0056b3; /* Đường viền cho thẻ */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Thêm bóng cho đường viền */
+  box-sizing: border-box; /* Đảm bảo padding và border được tính toán đúng */
+}
+
+.card-content a:hover {
+  background-color: #0056b3; /* Màu nền khi hover */
+}
+
+.download-button {
+  width: 50%; /* Chiều rộng của nút */
+  font-weight: bold;
+  text-align: center; /* Căn giữa chữ */
+  margin: 0 auto; /* Tự động căn giữa */
+  display: inline-block; /* Để căn giữa thẻ a */
+  padding: 10px; /* Thêm padding trên và dưới */
+  background-color: #007bff; /* Màu nền cho thẻ download */
+  color: white; /* Màu chữ */
+  text-decoration: none; /* Bỏ gạch chân */
+  border-radius: 5px; /* Bo góc cho thẻ */
+  border: 2px solid #0056b3; /* Đường viền cho thẻ */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Thêm bóng cho đường viền */
+  transition: background-color 0.3s, border-color 0.3s; /* Hiệu ứng chuyển đổi */
+}
+
+.download-button:hover {
+  background-color: #0056b3; /* Màu nền khi hover */
+  border-color: #004494; /* Màu viền khi hover */
+}
 /* Media Queries for Mobile and Tablet */
 @media screen and (max-width: 768px) {
   .card {
@@ -63,6 +115,10 @@ body {
 .title-blue { background-color: #0000ff; }
 .title-green { background-color: #09ff00; }
 .title-orange { background-color: #f39c12; }
+.title-puple { background-color: #aa00ff; }
+.title-darkred { background-color: darkred; }
+.title-darkblue { background-color: darkblue; }
+.title-darkgreen { background-color: darkgreen; }
 .modal {
   display: flex;
   flex-direction: column;
