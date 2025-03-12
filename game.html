@@ -116,7 +116,7 @@
     </div>
     <img src="https://imgur.com/x46Vm2M.png" alt="Troll" class="troll-image" id="trollImage">
     <script>
-        let luckyNumbers = [1];
+        let luckyNumbers = [1,100];
         let score = localStorage.getItem("score") ? parseInt(localStorage.getItem("score")) : 0;
         document.getElementById("score").innerText = score;
         let canClick = true;
@@ -130,7 +130,7 @@
             
             setTimeout(() => {
                 rock.classList.remove("shake");
-                let randomNumber = Math.floor(Math.random() * 100) + 1;
+                let randomNumber = Math.floor(Math.random() * 1000) + 1;
                 if (luckyNumbers.includes(randomNumber)) {
                     score++;
                     localStorage.setItem("score", score);
