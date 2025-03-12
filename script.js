@@ -115,3 +115,107 @@ document.addEventListener("keydown", function (e) {
 document.addEventListener("dragstart", function (e) {
   e.preventDefault();
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const deletedCards = JSON.parse(localStorage.getItem("deletedCards")) || [];
+    const correctPassword = "1979198420082010"; // Thay đổi mật khẩu tại đây
+    const notificationCount = document.getElementById("notification-count");
+
+    function updateCardCount() {
+        let visibleCards = document.querySelectorAll(".card:not([style*='display: none'])").length;
+        notificationCount.textContent = visibleCards.toString().padStart(2, "0");
+    }
+
+    // Ẩn các thẻ đã bị xóa trước đó
+    document.querySelectorAll(".card").forEach((card) => {
+        if (deletedCards.includes(card.dataset.id)) {
+            card.style.display = "none";
+        }
+    });
+
+    updateCardCount(); // Cập nhật số lượng ban đầu
+
+    // Xử lý sự kiện khi bấm vào nút xóa
+    document.querySelectorAll(".delete-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+            let card = this.closest(".card");
+            let cardId = card.dataset.id;
+            let enteredPassword = prompt("Nhập mật khẩu để xóa thẻ:");
+
+            if (enteredPassword === correctPassword) {
+                alert("Xóa thành công!");
+                card.style.display = "none";
+
+                if (!deletedCards.includes(cardId)) {
+                    deletedCards.push(cardId);
+                }
+
+                localStorage.setItem("deletedCards", JSON.stringify(deletedCards));
+                updateCardCount(); // Cập nhật bộ đếm ngay lập tức
+            } else {
+                alert("Mật khẩu không đúng! Không thể xóa thẻ.");
+            }
+        });
+    });
+
+    // Xử lý sự kiện khi bấm vào nút khôi phục
+    document.getElementById("restore-btn").addEventListener("click", function () {
+        if (deletedCards.length === 0) {
+            alert("Không có thẻ nào để khôi phục.");
+            return;
+        }
+
+        let enteredPassword = prompt("Nhập mật khẩu để khôi phục thẻ:");
+        if (enteredPassword !== correctPassword) {
+            alert("Mật khẩu không đúng! Không thể khôi phục thẻ.");
+            return;
+        }
+
+        let restoreContainer = document.createElement("div");
+        restoreContainer.id = "restore-container";
+
+        let title = document.createElement("p");
+        title.innerText = "Chọn thẻ cần khôi phục:";
+        restoreContainer.appendChild(title);
+
+        deletedCards.forEach((cardId) => {
+            let label = document.createElement("label");
+            label.innerHTML = `<input type="checkbox" value="${cardId}"> Thẻ ${cardId}`;
+            restoreContainer.appendChild(label);
+            restoreContainer.appendChild(document.createElement("br"));
+        });
+
+        let confirmBtn = document.createElement("button");
+        confirmBtn.id = "confirm-restore";
+        confirmBtn.innerText = "Khôi phục";
+        restoreContainer.appendChild(confirmBtn);
+
+        document.body.appendChild(restoreContainer);
+
+        confirmBtn.addEventListener("click", function () {
+            let selectedCards = Array.from(
+                restoreContainer.querySelectorAll("input:checked")
+            ).map((checkbox) => checkbox.value);
+
+            if (selectedCards.length === 0) {
+                alert("Bạn chưa chọn thẻ nào để khôi phục.");
+                return;
+            }
+
+            selectedCards.forEach((cardId) => {
+                let card = document.querySelector(`.card[data-id="${cardId}"]`);
+                if (card) {
+                    card.style.display = "block";
+                    card.classList.add("fade-in"); // Hiệu ứng hiện lại
+                }
+                deletedCards.splice(deletedCards.indexOf(cardId), 1);
+            });
+
+            localStorage.setItem("deletedCards", JSON.stringify(deletedCards));
+            updateCardCount(); // Cập nhật bộ đếm ngay lập tức
+            alert("Khôi phục thành công!");
+
+            document.body.removeChild(restoreContainer);
+        });
+    });
+});
