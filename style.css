@@ -15,19 +15,42 @@ body {
   gap: 20px; /* Space between cards */
 }
 .notification {
-  width: 100%; /* Đảm bảo ô thông báo chiếm toàn bộ chiều rộng */
-  background-color: #ffc107; /* Màu nền cho ô thông báo */
-  color: black; /* Màu chữ cho ô thông báo */
-  padding: 5px; /* Padding cho ô thông báo */
-  text-align: center; /* Căn giữa nội dung trong ô thông báo */
-  border-radius: 5px; /* Bo góc cho ô thông báo */
-  margin-bottom: 10px; /* Khoảng cách dưới ô thông báo */
-  font-size: 2.5em; /* Kích thước chữ lớn hơn */
-  font-weight: bold; /* Chữ đậm */
-  text-transform: uppercase; /* Chữ in hoa */
-  letter-spacing: 1px; /* Khoảng cách giữa các chữ cái */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Thêm bóng cho ô thông báo */
+  display: flex;
+  align-items: center; /* Căn giữa theo chiều dọc */
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  color: #212121; /* Màu chữ tối hơn để dễ đọc */
+  border: 3px solid #000000;
+  padding: 15px 30px; /* Tăng padding cho ô thông báo */
+  border-radius: 8px; /* Bo góc cho ô thông báo */
+  font-weight: bold;
+  font-size: 20px; /* Kích thước chữ vừa phải */
+  text-align: center;
+  width: fit-content; /* Vừa với nội dung */
+  margin: 20px auto; /* Căn giữa theo trang và thêm khoảng cách trên/dưới */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Thêm bóng cho ô thông báo */
+  transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu nền */
 }
+
+.notification p {
+  margin: 0;
+  display: flex;
+  align-items: center; /* Căn giữa theo chiều dọc */
+  font-size: 30px; /* Kích thước chữ cho số thông báo */
+}
+
+#notification-count {
+  background-color: #ffca28; /* Màu nền cho ô thông báo */
+  color: #d32f2f; /* Màu chữ cho số thông báo (màu đỏ) */
+  padding: 10px; /* Tăng padding cho ô thông báo */
+  text-align: center; /* Căn giữa nội dung trong ô thông báo */
+  border-radius: 8px; /* Bo góc cho ô thông báo */
+  margin-left: 10px; /* Khoảng cách giữa nhãn và số thông báo */
+  font-size: 40px; /* Kích thước chữ cho số thông báo */
+  font-weight: bold; /* Chữ đậm cho số thông báo */
+  letter-spacing: 1px; /* Khoảng cách giữa các chữ cái */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Thêm bóng cho ô thông báo */
+}
+
 .card {
   width: calc(50% - 10px); /* Width for larger screens */
   max-height: 80%; /* Maximum height for the card */
@@ -39,6 +62,7 @@ body {
   padding-bottom: 5px;
   transition: transform 0.3s, box-shadow 0.3s; /* Thêm hiệu ứng chuyển tiếp */
   border: 1px solid black; /* Viền mặc định */
+  position: relative;
 }
 
 .card:hover {
@@ -239,4 +263,132 @@ tr:nth-child(even) {
 
 tr:hover {
   background-color: #f1f1f1; /* Màu nền khi hover */
+}
+
+.luot-xem:before {
+  content: '\f06e'; /* Mã icon mắt trong FontAwesome */
+  font-family: 'Font Awesome 5 Free'; /* FontAwesome 5 */
+  font-weight: 900; /* Chế độ icon đặc */
+  margin-right: 5px;
+  display: inline-block;
+}
+
+span.luot-xem {
+  color: #0000ac;
+  font-size: 14px; /* Tùy chỉnh kích thước */
+  font-weight: bold;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 25px;
+  height: 25px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  line-height: 25px;
+  transition: background 0.3s;
+}
+
+.delete-btn:hover {
+  background-color: darkred;
+}
+
+/* Nút Khôi phục chính */
+#restore-btn {
+  display: inline-block; /* Thay đổi từ block sang inline-block để nút chỉ chiếm không gian cần thiết */
+  margin: 10px auto; /* Tăng khoảng cách trên và dưới */
+  padding: 10px 20px; /* Điều chỉnh padding cho nút để vừa đủ với chữ */
+  background-color: #007bff; /* Màu nền */
+  color: white; /* Màu chữ */
+  border: none; /* Không có viền */
+  border-radius: 8px; /* Bo góc cho nút */
+  cursor: pointer; /* Con trỏ khi hover */
+  font-size: 18px; /* Kích thước chữ lớn hơn */
+  font-weight: bold; /* Chữ đậm */
+  text-transform: uppercase; /* Chữ in hoa */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Thêm bóng cho nút */
+  transition: background 0.3s, box-shadow 0.3s, transform 0.3s; /* Thêm hiệu ứng chuyển động */
+}
+
+#restore-btn:hover {
+  background-color: #0056b3; /* Màu nền khi hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Tăng bóng khi hover */
+  transform: translateY(-2px); /* Hiệu ứng nâng lên khi hover */
+}
+/* Hộp chọn thẻ khôi phục */
+#restore-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 300px;
+  max-width: 90%;
+  text-align: center;
+}
+
+#restore-container p {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Danh sách checkbox */
+#restore-container label {
+  display: block;
+  font-size: 16px;
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+#restore-container input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+/* Nút "Khôi phục" trong hộp chọn */
+#confirm-restore {
+  margin-top: 15px;
+  padding: 8px 15px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+#confirm-restore:hover {
+  background-color: #218838;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Hiệu ứng fade-in khi khôi phục */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.card.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+.card[style*="visibility: hidden"] {
+  opacity: 0;
 }
