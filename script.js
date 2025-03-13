@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
         { title: "Thứ 4 ngày 26/3/2025 ", content: "Kiểm tra GKII môn ÂM NHẠC", date: "2025-03-29" },
         { title: "Thứ 5 ngày 27/3/2025 ", content: "Kiểm tra GKII môn LỊCH SỬ", date: "2025-03-29" },
         { title: "Thứ 6 ngày 28/3/2025 ", content: "Kiểm tra GKII môn TIN HỌC", date: "2025-03-29" },
+        { title: "Thứ 7 ngày 15/3/2025 ", content: "Tham dự lớp cảm tình Đoàn ở phòng tiếng anh tiểu học", date: "2025-03-15" },
         { title: "Thứ 3 ngày 18/3/2025 ", content: "Nộp bài video mĩ thuật", date: "2025-03-18" },
     ];
 
@@ -219,3 +220,32 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+function generateFilterOptions() {
+    let select = document.getElementById("filter-select");
+    let cards = document.querySelectorAll(".card");
+    let uniqueIds = new Set();
+
+    cards.forEach(card => uniqueIds.add(card.getAttribute("data-id")));
+
+    uniqueIds.forEach(id => {
+        let option = document.createElement("option");
+        option.value = id;
+        option.textContent = "Thẻ " + id;
+        select.appendChild(option);
+    });
+}
+
+// Lọc thẻ dựa vào bộ lọc
+function filterCards() {
+    let selectedId = document.getElementById("filter-select").value;
+    let cards = document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+        let cardId = card.getAttribute("data-id");
+        card.style.display = (selectedId === "" || cardId === selectedId) ? "block" : "none";
+    });
+}
+
+// Gọi hàm tạo bộ lọc khi trang tải
+document.addEventListener("DOMContentLoaded", generateFilterOptions);
