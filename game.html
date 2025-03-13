@@ -116,7 +116,7 @@
     </div>
     <img src="https://imgur.com/x46Vm2M.png" alt="Troll" class="troll-image" id="trollImage">
     <script>
-        let luckyNumbers = [1,100];
+        let luckyNumbers = [1,100,500];
         let score = localStorage.getItem("score") ? parseInt(localStorage.getItem("score")) : 0;
         document.getElementById("score").innerText = score;
         let canClick = true;
@@ -130,7 +130,7 @@
             
             setTimeout(() => {
                 rock.classList.remove("shake");
-                let randomNumber = Math.floor(Math.random() * 1000) + 1;
+                let randomNumber = Math.floor(Math.random() * 500) + 1;
                 if (luckyNumbers.includes(randomNumber)) {
                     score++;
                     localStorage.setItem("score", score);
@@ -153,4 +153,34 @@
     </script>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+    // Chặn chuột phải
+    document.addEventListener("contextmenu", function (e) {
+      e.preventDefault();
+      alert("Chuột phải bị vô hiệu hóa!");
+    });
+    
+    // Chặn sao chép (Ctrl + C, Ctrl + X, Ctrl + V, Ctrl + U,...)
+    document.addEventListener("keydown", function (e) {
+      if (
+          (e.ctrlKey && (e.key === "c" || e.key === "x" || e.key === "v" || e.key === "u")) || // Ctrl + C, X, V, U
+          (e.metaKey && (e.key === "c" || e.key === "x" || e.key === "v" || e.key === "u")) || // Command trên Mac
+          e.key === "F12" || // Chặn DevTools
+          (e.ctrlKey && e.shiftKey && e.key === "I") || // Ctrl + Shift + I
+          (e.ctrlKey && e.shiftKey && e.key === "J") || // Ctrl + Shift + J
+          (e.ctrlKey && e.key === "S") || // Ctrl + S
+          (e.ctrlKey && e.key === "P") // Ctrl + P
+      ) {
+          e.preventDefault();
+          alert("Chức năng này đã bị vô hiệu hóa!");
+      }
+    });
+    
+    // Chặn kéo thả để tránh kéo ảnh ra khỏi trang
+    document.addEventListener("dragstart", function (e) {
+      e.preventDefault();
+    });
+
+</script>
 </html>
+
