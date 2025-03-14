@@ -244,40 +244,23 @@
             function checkButtonStatus() {
                 if (lastCheckIn === today) {
                     checkInButton.disabled = true;
-                    checkInButton.style.background = "#aaa";
-                    checkInButton.style.cursor = "not-allowed";
-                    checkInButton.style.boxShadow = "none";
                 } else {
                     checkInButton.disabled = false;
-                    checkInButton.style.background = "linear-gradient(145deg, #007bff, #0056b3)";
-                    checkInButton.style.cursor = "pointer";
-                    checkInButton.style.boxShadow = "3px 3px 5px rgba(0, 0, 0, 0.2)";
                 }
             }
 
-            checkInButton.addEventListener("mouseenter", function () {
-                if (!checkInButton.disabled) {
-                    checkInButton.style.background = "linear-gradient(145deg, #0056b3, #004494)";
-                    checkInButton.style.transform = "scale(1.05)";
-                }
-            });
-
-            checkInButton.addEventListener("mouseleave", function () {
-                if (!checkInButton.disabled) {
-                    checkInButton.style.background = "linear-gradient(145deg, #007bff, #0056b3)";
-                    checkInButton.style.transform = "scale(1)";
-                }
-            });
-
             checkInButton.addEventListener("click", function () {
                 if (checkInButton.disabled) return;
+                if (lastCheckIn === today) {
+                    alert("⏳ Bạn đã điểm danh hôm nay rồi! Hãy quay lại vào ngày mai.");
+                    return;
+                }
                 let index = attendance.findIndex(day => !day);
                 if (index !== -1) {
                     attendance[index] = true;
                     localStorage.setItem("attendance", JSON.stringify(attendance));
                     localStorage.setItem("lastCheckIn", today);
                     checkInButton.disabled = true;
-                    checkButtonStatus();
                     renderDays();
                     alert("🎉 Chúc mừng! Bạn đã điểm danh thành công hôm nay! 🎊");
                     if (attendance.every(day => day)) {
