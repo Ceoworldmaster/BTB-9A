@@ -206,11 +206,28 @@
             const daysContainer = document.getElementById("daysContainer");
             const reward = document.getElementById("reward");
             const checkInButton = document.getElementById("checkInButton");
-            let attendance = JSON.parse(localStorage.getItem("attendance")) || [false, false, false, false, false, false, false];
-            let lastCheckIn = localStorage.getItem("lastCheckIn");
-            let today = new Date().toDateString();
+
+            function getFormattedDate() {
+                let d = new Date();
+                return d.getFullYear() + "-" + (d.getMonth() + 1).toString().padStart(2, '0') + "-" + d.getDate().toString().padStart(2, '0');
+            }
+
+            let today = getFormattedDate();
             let startOfWeek = localStorage.getItem("startOfWeek") || today;
-            
+            let attendance = JSON.parse(localStorage.getItem("attendance")) || [false, false, false, false, false, false, false];
+            let lastCheckIn = localStorage.getItem("lastCheckIn") || "";
+
+            function resetWeekIfNeeded() {
+                let currentDay = new Date(today).getDay();
+                let storedWeekStart = new Date(startOfWeek);
+                if (currentDay === 1 && storedWeekStart.getDay() !== 1) {
+                    attendance = [false, false, false, false, false, false, false];
+                    localStorage.setItem("attendance", JSON.stringify(attendance));
+                    localStorage.setItem("startOfWeek", today);
+                    localStorage.removeItem("lastCheckIn");
+                }
+            }
+
             function renderDays() {
                 daysContainer.innerHTML = "";
                 attendance.forEach((checked, index) => {
@@ -221,65 +238,61 @@
                     daysContainer.appendChild(day);
                 });
 
-                if (attendance.every(day => day)) {
-                    reward.style.display = "block";
-                } else {
-                    reward.style.display = "none";
-                }
+                reward.style.display = attendance.every(day => day) ? "block" : "none";
             }
 
             function checkButtonStatus() {
                 if (lastCheckIn === today) {
                     checkInButton.disabled = true;
-                    checkInButton.addEventListener("click", function () {
-                        alert("⏳ Vui lòng quay lại điểm danh vào ngày hôm sau!");
-                    });
-                } else if (isWeekLocked()) {
-                    checkInButton.disabled = true;
-                    checkInButton.addEventListener("click", function () {
-                        alert("🔒 Bạn đã bỏ lỡ một ngày. Hệ thống bị khóa đến hết tuần!");
-                    });
+                    checkInButton.style.background = "#aaa";
+                    checkInButton.style.cursor = "not-allowed";
+                    checkInButton.style.boxShadow = "none";
                 } else {
                     checkInButton.disabled = false;
+                    checkInButton.style.background = "linear-gradient(145deg, #007bff, #0056b3)";
+                    checkInButton.style.cursor = "pointer";
+                    checkInButton.style.boxShadow = "3px 3px 5px rgba(0, 0, 0, 0.2)";
                 }
             }
 
-            function isWeekLocked() {
-                let missedDay = false;
-                for (let i = 0; i < attendance.length; i++) {
-                    if (!attendance[i] && missedDay) {
-                        return true; // Nếu đã có ngày bị bỏ lỡ trước đó thì khóa luôn
-                    }
-                    if (!attendance[i]) {
-                        missedDay = true;
-                    }
+            checkInButton.addEventListener("mouseenter", function () {
+                if (!checkInButton.disabled) {
+                    checkInButton.style.background = "linear-gradient(145deg, #0056b3, #004494)";
+                    checkInButton.style.transform = "scale(1.05)";
                 }
-                return false;
-            }
+            });
+
+            checkInButton.addEventListener("mouseleave", function () {
+                if (!checkInButton.disabled) {
+                    checkInButton.style.background = "linear-gradient(145deg, #007bff, #0056b3)";
+                    checkInButton.style.transform = "scale(1)";
+                }
+            });
 
             checkInButton.addEventListener("click", function () {
                 if (checkInButton.disabled) return;
-                for (let i = 0; i < attendance.length; i++) {
-                    if (!attendance[i]) {
-                        attendance[i] = true;
-                        localStorage.setItem("attendance", JSON.stringify(attendance));
-                        localStorage.setItem("lastCheckIn", today);
-                        checkInButton.disabled = true;
-                        renderDays();
-                        alert("🎉 Chúc mừng! Bạn đã điểm danh thành công hôm nay! 🎊");
-                        if (attendance.every(day => day)) {
-                            setTimeout(() => {
-                                alert("🎁 Bạn đã hoàn thành 7 ngày! Phần thưởng của bạn là 20 điểm thi đua tuần!");
-                            }, 500);
-                        }
-                        return;
+                let index = attendance.findIndex(day => !day);
+                if (index !== -1) {
+                    attendance[index] = true;
+                    localStorage.setItem("attendance", JSON.stringify(attendance));
+                    localStorage.setItem("lastCheckIn", today);
+                    checkInButton.disabled = true;
+                    checkButtonStatus();
+                    renderDays();
+                    alert("🎉 Chúc mừng! Bạn đã điểm danh thành công hôm nay! 🎊");
+                    if (attendance.every(day => day)) {
+                        setTimeout(() => {
+                            alert("🎁 Bạn đã hoàn thành 7 ngày! Phần thưởng của bạn là 20 điểm thi đua tuần!");
+                        }, 500);
                     }
                 }
             });
 
+            resetWeekIfNeeded();
             renderDays();
             checkButtonStatus();
         });
+
     </script>
 </body>
 </html>
