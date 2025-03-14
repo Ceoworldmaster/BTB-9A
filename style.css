@@ -5,7 +5,10 @@ body {
   justify-content: center;
   gap: 20px;
   padding: 100px 20px 20px; /* Tạo khoảng cách từ navbar */
-  background-color: #f8f9fa;
+  background: url('https://imgur.com/nIV57mM.png') no-repeat center center fixed;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   position: relative;
 }
 .container {
