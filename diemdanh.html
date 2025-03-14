@@ -12,13 +12,16 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f4f4f4;
+            background: url('https://imgur.com/RTTjHpM.png') no-repeat center center fixed;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
         .day-container {
             max-width: 400px;
             margin: 100px auto;
-            border: 3px solid #000000;
+            border: 3px solid #ffffff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -35,16 +38,16 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: linear-gradient(145deg, #e0e0e0, #ffffff);
-            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1), -3px -3px 5px rgba(255, 255, 255, 0.7);
+            background: linear-gradient(145deg, #e0e0e000, #ffffff00);
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1), -3px -3px 5px rgba(255, 255, 255, 0);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 18px;
             font-weight: bold;
-            color: #555;
+            color: #ffffff;
             transition: all 0.3s ease-in-out;
-            border: 2px solid #000000;
+            border: 2px solid #ffffff;
         }
 
         .day:hover {
@@ -89,7 +92,7 @@
             border-radius: 8px;
             box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease-in-out;
-            border: 2px solid #000000;
+            border: 2px solid #ffffff;
         }
 
         .day-container button {
@@ -101,6 +104,45 @@
             background: #aaa;
             cursor: not-allowed;
             box-shadow: none;
+        }
+        .rules {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff3cd00; /* Màu vàng nhạt */
+            border-left: 5px solid #ffcc00;
+            border-radius: 10px;
+            text-align: left;
+            font-size: 14px;
+            font-weight: bold;
+            color: #ffff;
+            -webkit-text-stroke: 0.25px black;
+        }
+
+        .rules h3 {
+            color: #ffff00;
+            text-shadow: 0 0 10px #FFD700, 0 0 20px #FFC107, 0 0 30px #FFA500;
+            margin-bottom: 10px;
+            font-size: 35px;
+            font-weight: bold;
+
+        }
+
+        .rules ul {
+            list-style: none;
+            padding: 0;
+            font-size: 20px;
+        }
+
+        .rules li {
+            margin: 5px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 20px;
+        }
+
+        .rules li::before {
+            position: absolute;
+            left: 0;
         }
 
     </style>
@@ -145,12 +187,20 @@
   </nav>
 <body>
     <div class="day-container">
-        <h2 style="font-weight: bold;">Điểm danh 7 ngày</h2>
+        <h2 style="font-weight: bold; color: #ffffff;">Điểm danh 7 ngày</h2>
         <div class="days" id="daysContainer"></div>
         <button id="checkInButton">Điểm danh</button>
         <div class="reward" id="reward">🎉 Chúc mừng! Bạn đã điểm danh đủ 7 ngày! 🎁</div>
     </div>
-
+    <div class="rules">
+        <h3>📜 Điều luật điểm danh:</h3>
+        <ul>
+            <li>✅ Bạn chỉ có thể điểm danh **một lần mỗi ngày**.</li>
+            <li>❌ Bỏ lỡ một ngày sẽ khiến hệ thống **bị khóa** đến hết tuần.</li>
+            <li>🎁 Hoàn thành 7 ngày liên tiếp sẽ nhận được **20 điểm thi đua**.</li>
+        </ul>
+    </div>
+    
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const daysContainer = document.getElementById("daysContainer");
