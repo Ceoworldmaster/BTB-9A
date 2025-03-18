@@ -5,11 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let tomorrowStr = tomorrow.toISOString().split('T')[0];
 
   let futureCards = [
-        { title: "Thứ 5 ngày 13/3/2025 ", content: "Kiểm tra GKII môn GDCD", date: "2025-03-29" },
-        { title: "Thứ 6 ngày 14/3/2025 ", content: "Kiểm tra GKII môn TOÁN", date: "2025-03-29" },
-        { title: "Thứ 2 ngày 17/3/2025 ", content: "Kiểm tra GKII môn KHTN", date: "2025-03-29" },
-        { title: "Thứ 3 ngày 18/3/2025 ", content: "Kiểm tra GKII môn NGỮ VĂN", date: "2025-03-29" },
-        { title: "Thứ 4 ngày 19/3/2025 ", content: "Kiểm tra GKII môn TIẾNG ANH - ĐỊA LÍ", date: "2025-03-29" },
+        { title: "Thứ 3 ngày 18/3/2025 ", content: "Kiểm tra GKII môn ĐỊA LÍ", date: "2025-03-29" },
+        { title: "Thứ 4 ngày 20/3/2025 ", content: "Kiểm tra GKII môn TIẾNG ANH", date: "2025-03-29" },
         { title: "Thứ 3 ngày 25/3/2025 ", content: "Kiểm tra GKII môn CÔNG NGHỆ - GDTC - MĨ THUẬT", date: "2025-03-29" },
         { title: "Thứ 4 ngày 26/3/2025 ", content: "Kiểm tra GKII môn ÂM NHẠC", date: "2025-03-29" },
         { title: "Thứ 5 ngày 27/3/2025 ", content: "Kiểm tra GKII môn LỊCH SỬ", date: "2025-03-29" },
