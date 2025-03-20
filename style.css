@@ -20,6 +20,41 @@ body {
   max-width: 800px; /* Giới hạn chiều rộng để trông đẹp hơn */
   margin: 0 auto; /* Căn giữa trên màn hình lớn */
 }
+.hero {
+  width: 100vw;
+  height:80vh;
+  background: url(https://imgur.com/HmFAOp8.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+  text-align: center;
+  display: flex;
+  align-items: center; /* Căn giữa theo chiều dọc */
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  margin-bottom: 20px;
+  margin-top: -10px;
+}
+
+.hero h2 {
+  font-family: 'Bungee';
+  font-size: 50px;
+  color: red;
+  animation: bounce 1s infinite, strokeColorChange 5s linear infinite;
+}
+
+.hero p {
+  color: red; /* Giữ nguyên màu đỏ */
+  font-family: 'Roboto', sans-serif; /* Font chữ hiện đại, dễ đọc */
+  font-size: 17px; /* Kích thước chữ vừa phải */
+  font-weight: bold; /* Chữ đậm hơn */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Hiệu ứng bóng chữ */
+  letter-spacing: 1px; /* Tăng khoảng cách giữa các chữ */
+  margin-top: 10px; /* Thêm khoảng cách trên */
+  padding-left: 20px; /* Đẩy nội dung ra xa mép trái */
+  padding-right: 20px; /* Đẩy nội dung ra xa mép phải */
+}
+
 
 .notification {
   display: flex;
