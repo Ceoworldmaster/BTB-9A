@@ -288,9 +288,9 @@ table {
   margin-top: 5px; /* Khoảng cách trên bảng */
 }
 
-th, td {
+th,td {
   padding: 12px; /* Khoảng cách trong ô */
-  text-align: left; /* Căn trái nội dung */
+  text-align: center; /* Căn trái nội dung */
   border: 1px solid #686868; /* Đường viền cho ô */
 }
 
