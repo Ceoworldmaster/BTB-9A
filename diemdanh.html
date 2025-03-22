@@ -213,17 +213,19 @@
             }
 
             let today = getFormattedDate();
-            let startOfWeek = localStorage.getItem("startOfWeek") || today;
             let attendance = JSON.parse(localStorage.getItem("attendance")) || [false, false, false, false, false, false, false];
             let lastCheckIn = localStorage.getItem("lastCheckIn") || "";
+            let lastResetDate = localStorage.getItem("lastResetDate") || "";
 
             function resetWeekIfNeeded() {
-                let currentDay = new Date(today).getDay();
-                let storedWeekStart = new Date(startOfWeek);
-                if (currentDay === 1 && storedWeekStart.getDay() !== 1) {
+                let now = new Date();
+                let currentDay = now.getDay(); // 0 = Chủ Nhật, 6 = Thứ Bảy
+                let resetDate = new Date(lastResetDate);
+
+                if (currentDay === 6 && (resetDate.toDateString() !== now.toDateString())) {
                     attendance = [false, false, false, false, false, false, false];
                     localStorage.setItem("attendance", JSON.stringify(attendance));
-                    localStorage.setItem("startOfWeek", today);
+                    localStorage.setItem("lastResetDate", today);
                     localStorage.removeItem("lastCheckIn");
                 }
             }
@@ -233,8 +235,13 @@
                 attendance.forEach((checked, index) => {
                     let day = document.createElement("div");
                     day.classList.add("day");
-                    if (checked) day.classList.add("checked");
                     day.innerText = index + 1;
+                    if (checked) {
+                        day.classList.add("checked");
+                        day.style.backgroundColor = "gray";
+                    } else {
+                        day.style.backgroundColor = "#007bff";
+                    }
                     daysContainer.appendChild(day);
                 });
 
@@ -244,8 +251,12 @@
             function checkButtonStatus() {
                 if (lastCheckIn === today) {
                     checkInButton.disabled = true;
+                    checkInButton.style.backgroundColor = "gray";
+                    checkInButton.style.cursor = "not-allowed";
                 } else {
                     checkInButton.disabled = false;
+                    checkInButton.style.backgroundColor = "#007bff";
+                    checkInButton.style.cursor = "pointer";
                 }
             }
 
@@ -261,6 +272,8 @@
                     localStorage.setItem("attendance", JSON.stringify(attendance));
                     localStorage.setItem("lastCheckIn", today);
                     checkInButton.disabled = true;
+                    checkInButton.style.backgroundColor = "gray";
+                    checkInButton.style.cursor = "not-allowed";
                     renderDays();
                     alert("🎉 Chúc mừng! Bạn đã điểm danh thành công hôm nay! 🎊");
                     if (attendance.every(day => day)) {
@@ -275,6 +288,33 @@
             renderDays();
             checkButtonStatus();
         });
+    </script>
+    <script>
+        document.addEventListener("contextmenu", function (e) {
+            e.preventDefault();
+            alert("Chuột phải bị vô hiệu hóa!");
+        });
+
+            // Chặn sao chép (Ctrl + C, Ctrl + X, Ctrl + V, Ctrl + U,...)
+        document.addEventListener("keydown", function (e) {
+            if (
+                (e.ctrlKey && (e.key === "c" || e.key === "x" || e.key === "v" || e.key === "u")) || // Ctrl + C, X, V, U
+                (e.metaKey && (e.key === "c" || e.key === "x" || e.key === "v" || e.key === "u")) || // Command trên Mac
+                e.key === "F12" || // Chặn DevTools
+                (e.ctrlKey && e.shiftKey && e.key === "I") || // Ctrl + Shift + I
+                (e.ctrlKey && e.shiftKey && e.key === "J") || // Ctrl + Shift + J
+                (e.ctrlKey && e.key === "S") || // Ctrl + S
+                (e.ctrlKey && e.key === "P") // Ctrl + P
+            ) {
+                e.preventDefault();
+                alert("Chức năng này đã bị vô hiệu hóa!");
+            }
+            });
+
+            // Chặn kéo thả để tránh kéo ảnh ra khỏi trang
+        document.addEventListener("dragstart", function (e) {
+            e.preventDefault();
+            });
 
     </script>
 </body>
