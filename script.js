@@ -5,10 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let tomorrowStr = tomorrow.toISOString().split('T')[0];
 
   let futureCards = [
-        { title: "Thứ 4 ngày 26/3/2025 ", content: "Kiểm tra GKII môn ÂM NHẠC", date: "2025-03-29" },
-        { title: "Thứ 4 ngày 26/3/2025 ", content: "Kiểm tra GKII môn LỊCH SỬ", date: "2025-03-29" },
-        { title: "Thứ 6 ngày 28/3/2025 ", content: "Kiểm tra GKII môn TIN HỌC", date: "2025-03-29" },
-        { title: "Thứ 3 ngày 18/3/2025 ", content: "Nộp bài video mĩ thuật", date: "2025-03-18" },
+        { title: "Thứ 2 ngày 31/3/2025 ", content: "Kiểm tra 15 phút KHTN", date: "2025-04-01" },
+        { title: "Thứ 3 ngày 1/4/2025 ", content: "Kiểm tra 90 phút môn Văn", date: "2025-04-01" },
     ];
 
   let groupedCards = futureCards.reduce((acc, card) => {
