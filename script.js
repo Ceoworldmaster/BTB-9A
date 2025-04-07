@@ -5,8 +5,10 @@ document.addEventListener("DOMContentLoaded", function () {
   let tomorrowStr = tomorrow.toISOString().split('T')[0];
 
   let futureCards = [
-        { title: "Thứ 2 ngày 31/3/2025 ", content: "Kiểm tra 15 phút KHTN", date: "2025-04-01" },
-        { title: "Thứ 3 ngày 1/4/2025 ", content: "Kiểm tra 90 phút môn Văn", date: "2025-04-01" },
+        { title: "Thứ 5 ngày 24/4/2025 ", content: "Môn GDCD và CÔNG NGHỆ", date: "2025-04-30" },
+        { title: "Thứ 3 ngày 25/4/2025 ", content: "Môn TIN HỌC và LỊCH SỬ ĐỊA LÍ", date: "2025-04-30" },
+        { title: "Thứ 5 ngày 28/4/2025 ", content: "Môn KHTN và NGỮ VĂN", date: "2025-04-30" },
+        { title: "Thứ 3 ngày 29/4/2025 ", content: "Môn TOÁN và TIẾNG ANH", date: "2025-04-30" },
     ];
 
   let groupedCards = futureCards.reduce((acc, card) => {
