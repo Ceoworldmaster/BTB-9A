@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let futureCards = [
         { title: "Thứ 5 ngày 24/4/2025 ", content: "Môn GDCD và CÔNG NGHỆ", date: "2025-04-30" },
         { title: "Thứ 3 ngày 25/4/2025 ", content: "Môn TIN HỌC và LỊCH SỬ ĐỊA LÍ", date: "2025-04-30" },
-        { title: "Thứ 5 ngày 28/4/2025 ", content: "Môn KHTN và NGỮ VĂN", date: "2025-04-30" },
+        { title: "Thứ 2 ngày 28/4/2025 ", content: "Môn KHTN và NGỮ VĂN", date: "2025-04-30" },
         { title: "Thứ 3 ngày 29/4/2025 ", content: "Môn TOÁN và TIẾNG ANH", date: "2025-04-30" },
     ];
 
